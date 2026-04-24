@@ -127,8 +127,8 @@ export default function PropertyDetail({ property, onBack }: PropertyDetailProps
                   <img src="https://i.pravatar.cc/150?u=diaz" alt="Asesor" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">Ricardo Díaz</h4>
-                  <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">Asesor Senior</p>
+                  <h4 className="font-bold text-gray-900">Anita Max Wynn</h4>
+                  <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">Asesora Senior</p>
                 </div>
               </div>
               <p className="text-xs text-gray-500 font-medium mb-4 italic">
