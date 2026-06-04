@@ -30,3 +30,18 @@
   @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.img-skeleton {
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skip-link {
+  @apply absolute -top-10 left-4 z-[100] bg-primary text-white px-4 py-2 rounded-b-xl font-bold text-sm transition-all focus:top-0;
+}
+

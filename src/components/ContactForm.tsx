@@ -66,7 +66,7 @@ export default function ContactForm({ propertyName, onSuccess }: ContactFormProp
         </div>
         <h3 className="text-3xl font-display font-bold text-gray-900 mb-3">¡Tu solicitud fue enviada!</h3>
         <p className="text-gray-600 mb-8 max-w-sm leading-relaxed">
-          Un asesor experto revisará tu interés y se pondrá en contacto contigo pronto para brindarte toda la información que necesitas.
+          Una persona asesora revisará tu interés y se pondrá en contacto contigo pronto para brindarte toda la información que necesitas.
         </p>
         <button 
           onClick={() => window.location.reload()}
@@ -89,16 +89,19 @@ export default function ContactForm({ propertyName, onSuccess }: ContactFormProp
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-1.5 focus-within:text-primary transition-colors">
-          <label className="text-xs font-bold uppercase tracking-widest px-1">Tu nombre completo</label>
+          <label htmlFor="form-name" className="text-xs font-bold uppercase tracking-widest px-1">Tu nombre completo</label>
           <input
+            id="form-name"
             type="text"
             placeholder="Ej: Juan Pérez"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'name-error' : undefined}
             className={`w-full p-4 bg-gray-50/50 rounded-2xl border-2 transition-all outline-none ${errors.name ? 'border-error/30 focus:border-error' : 'border-transparent focus:border-primary focus:bg-white'}`}
           />
           {errors.name && (
-            <motion.p initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="text-xs font-bold text-error mt-1.5 flex items-center gap-1">
+            <motion.p id="name-error" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} role="alert" className="text-xs font-bold text-error mt-1.5 flex items-center gap-1">
               <Info className="w-3 h-3" /> {errors.name}
             </motion.p>
           )}
@@ -106,31 +109,37 @@ export default function ContactForm({ propertyName, onSuccess }: ContactFormProp
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase tracking-widest px-1">Número de contacto</label>
+            <label htmlFor="form-phone" className="text-xs font-bold uppercase tracking-widest px-1">Número de contacto</label>
             <input
+              id="form-phone"
               type="tel"
               placeholder="+57 300 000 0000"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              aria-invalid={!!errors.phone}
+              aria-describedby={errors.phone ? 'phone-error' : undefined}
               className={`w-full p-4 bg-gray-50/50 rounded-2xl border-2 transition-all outline-none ${errors.phone ? 'border-error/30 focus:border-error' : 'border-transparent focus:border-primary focus:bg-white'}`}
             />
             {errors.phone && (
-              <motion.p initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="text-xs font-bold text-error mt-1.5 flex items-center gap-1">
+              <motion.p id="phone-error" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} role="alert" className="text-xs font-bold text-error mt-1.5 flex items-center gap-1">
                 <Info className="w-3 h-3" /> {errors.phone}
               </motion.p>
             )}
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold uppercase tracking-widest px-1">Correo electrónico</label>
+            <label htmlFor="form-email" className="text-xs font-bold uppercase tracking-widest px-1">Correo electrónico</label>
             <input
+              id="form-email"
               type="email"
               placeholder="correo@ejemplo.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? 'email-error' : undefined}
               className={`w-full p-4 bg-gray-50/50 rounded-2xl border-2 transition-all outline-none ${errors.email ? 'border-error/30 focus:border-error' : 'border-transparent focus:border-primary focus:bg-white'}`}
             />
             {errors.email && (
-              <motion.p initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="text-xs font-bold text-error mt-1.5 flex items-center gap-1">
+              <motion.p id="email-error" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} role="alert" className="text-xs font-bold text-error mt-1.5 flex items-center gap-1">
                 <Info className="w-3 h-3" /> {errors.email}
               </motion.p>
             )}
@@ -162,7 +171,7 @@ export default function ContactForm({ propertyName, onSuccess }: ContactFormProp
           ) : (
             <>
               <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              <span>Contactar asesor ahora mismo</span>
+              <span>Contactar a una asesora ahora mismo</span>
             </>
           )}
         </button>

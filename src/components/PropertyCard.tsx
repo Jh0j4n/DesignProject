@@ -1,5 +1,6 @@
 import { Bed, Bath, Square, Heart, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useCallback, useRef, useEffect } from 'react';
 
 export interface PropertyData {
   id: number;
@@ -12,25 +13,50 @@ export interface PropertyData {
   image: string;
   description?: string;
   features?: string[];
+  gradient?: string;
 }
 
 interface PropertyCardProps extends PropertyData {
   onViewDetails: (id: number) => void;
 }
 
-export default function PropertyCard({ id, title, price, location, beds, baths, sqft, image, onViewDetails }: PropertyCardProps) {
+export default function PropertyCard({ id, title, price, location, beds, baths, sqft, image, gradient, onViewDetails }: PropertyCardProps) {
+  const imgRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleImgReady = useCallback((img: HTMLImageElement) => {
+    img.style.opacity = '1';
+    img.style.display = 'block';
+    containerRef.current?.classList.remove('img-skeleton');
+  }, []);
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      handleImgReady(imgRef.current);
+    }
+  }, [handleImgReady]);
+
   return (
     <motion.div
       whileHover={{ y: -8 }}
       className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group flex flex-col h-full"
     >
       {/* Media Header */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div ref={containerRef} className="relative aspect-[4/3] overflow-hidden bg-gray-100 img-skeleton">
+        <div className={`absolute inset-0 bg-gradient-to-br ${gradient || 'from-gray-300 to-gray-400'}`}></div>
         <img
+          ref={imgRef}
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          loading="lazy"
+          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 opacity-0 relative z-10"
           referrerPolicy="no-referrer"
+          onLoad={(e) => handleImgReady(e.target as HTMLImageElement)}
+          onError={(e) => {
+            const img = e.target as HTMLImageElement;
+            img.style.display = 'none';
+            containerRef.current?.classList.remove('img-skeleton');
+          }}
         />
         <div className="absolute top-4 left-4 flex gap-2">
           <span className="bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
@@ -45,14 +71,14 @@ export default function PropertyCard({ id, title, price, location, beds, baths, 
       {/* Body Content */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="mb-4">
-          <h3 className="text-2xl font-display font-extrabold text-gray-900 group-hover:text-primary transition-colors leading-tight mb-1">{price}</h3>
+          <h3 className="text-xl font-display font-bold text-gray-900 group-hover:text-primary transition-colors leading-tight mb-1 line-clamp-2">{title}</h3>
           <div className="flex items-center gap-1.5 text-gray-500">
             <MapPin className="w-3.5 h-3.5 text-gray-400" />
             <span className="text-xs font-semibold uppercase tracking-tight">{location}</span>
           </div>
         </div>
         
-        <p className="text-sm text-gray-600 font-medium mb-6 line-clamp-2">{title}</p>
+        <p className="text-2xl font-display font-extrabold text-gray-900 mb-6">{price}</p>
 
         {/* Specs Grid */}
         <div className="grid grid-cols-3 gap-3 py-4 border-t border-gray-50 mb-6 mt-auto">

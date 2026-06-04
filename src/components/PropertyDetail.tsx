@@ -41,12 +41,13 @@ export default function PropertyDetail({ property, onBack }: PropertyDetailProps
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Gallery Preview */}
-            <div className="rounded-[3rem] overflow-hidden shadow-2xl mb-12 group relative aspect-[16/9]">
+            <div className="rounded-[3rem] overflow-hidden shadow-2xl mb-12 group relative aspect-[16/9] bg-gray-100 img-skeleton">
               <img 
                 src={property.image} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover opacity-0 transition-opacity duration-500"
                 alt={property.title}
                 referrerPolicy="no-referrer"
+                onLoad={(e) => { (e.target as HTMLImageElement).style.opacity = '1'; (e.target as HTMLImageElement).parentElement!.classList.remove('img-skeleton'); }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
