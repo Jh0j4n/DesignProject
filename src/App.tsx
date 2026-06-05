@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar';
 import HeroSlider from './components/HeroSlider';
-import PropertyFilters from './components/PropertyFilters';
+import PropertyFilters, { FiltersState } from './components/PropertyFilters';
 import FeaturedGrid, { PROPERTIES } from './components/FeaturedGrid';
 import PropertyDetail from './components/PropertyDetail';
 import ContactForm from './components/ContactForm';
@@ -15,16 +15,55 @@ import FAQView from './components/FAQView';
 import BlogView from './components/BlogView';
 import ToolsView from './components/ToolsView';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import React from 'react';
+import type { PropertyData } from './components/PropertyCard';
 
 type View = 'home' | 'list' | 'detail' | 'contact' | 'about' | 'services' | 'faq' | 'blog' | 'tools';
+
+const defaultFilters: FiltersState = { type: '', location: '', priceRange: '', bedrooms: '' };
+
+function parsePrice(s: string): number {
+  return Number(s.replace(/[$.]/g, ''));
+}
+
+function getPropertyType(p: PropertyData): string {
+  if (p.beds === 0) return p.title.includes('Oficina') ? 'Oficina' : 'Local';
+  if (/Villa|Casa|Residencia|Cabaña|Playa/i.test(p.title)) return 'Casa';
+  if (/Penthouse|Apartamento|Apartaestudio/i.test(p.title)) return 'Apartamento';
+  if (/Loft/i.test(p.title)) return 'Loft';
+  return 'Otro';
+}
+
+function getCity(p: PropertyData): string {
+  return p.location.split(',')[0].trim();
+}
+
+function applyFilters(list: PropertyData[], f: FiltersState): PropertyData[] {
+  return list.filter(p => {
+    if (f.type && getPropertyType(p) !== f.type) return false;
+    if (f.location && getCity(p) !== f.location) return false;
+    if (f.priceRange) {
+      const price = parsePrice(p.price) / 1000;
+      const [min, max] = f.priceRange.split('-').map(Number);
+      if (price < min || price > max) return false;
+    }
+    if (f.bedrooms) {
+      const beds = Number(f.bedrooms);
+      if (f.bedrooms === '5' ? p.beds < 5 : p.beds !== beds) return false;
+    }
+    return true;
+  });
+}
 
 export default function App() {
   const [currentView, setCurrentView] = useState<View>('home');
   const [selectedPropertyId, setSelectedPropertyId] = useState<number | null>(null);
+  const [filters, setFilters] = useState<FiltersState>(defaultFilters);
 
   const mainRef = React.useRef<HTMLDivElement>(null);
+
+  const filteredProperties = useMemo(() => applyFilters(PROPERTIES, filters), [filters]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -51,8 +90,8 @@ export default function App() {
         onExplore={() => handleNavigate('list')}
         onContact={() => handleNavigate('contact')}
       />
-      <PropertyFilters onSearch={() => handleNavigate('list')} />
-      <FeaturedGrid onViewDetails={handleViewDetails} onViewAll={() => handleNavigate('list')} />
+      <PropertyFilters filters={filters} onChange={setFilters} onSearch={() => handleNavigate('list')} />
+      <FeaturedGrid onViewDetails={handleViewDetails} onViewAll={() => handleNavigate('list')} properties={filteredProperties} />
       <Partners />
       <StatsCounter />
       <Testimonials />
@@ -91,15 +130,15 @@ export default function App() {
               <div className="max-w-7xl mx-auto px-6 md:px-8 py-16">
                 <header className="mb-12">
                   <span className="inline-block bg-primary/5 px-4 py-1.5 rounded-full text-primary text-[10px] font-bold uppercase tracking-widest mb-4">
-                    Catálogo {PROPERTIES.length} propiedades
+                    Catálogo {filteredProperties.length} propiedades
                   </span>
                   <h1 className="text-5xl md:text-6xl font-display font-extrabold text-gray-900 mb-4 tracking-tighter">Nuestras Propiedades</h1>
                   <p className="text-xl text-gray-500 font-medium max-w-2xl leading-relaxed">
                     Explora nuestra selección exclusiva de inmuebles residenciales, comerciales y de inversión, todos validados legalmente para tu tranquilidad.
                   </p>
                 </header>
-                <PropertyFilters onSearch={() => {}} noOffset />
-                <FeaturedGrid onViewDetails={handleViewDetails} onViewAll={() => handleNavigate('list')} />
+                <PropertyFilters filters={filters} onChange={setFilters} onSearch={() => {}} noOffset />
+                <FeaturedGrid onViewDetails={handleViewDetails} onViewAll={() => handleNavigate('list')} properties={filteredProperties} />
               </div>
             </motion.div>
           )}
@@ -138,4 +177,3 @@ export default function App() {
     </div>
   );
 }
-

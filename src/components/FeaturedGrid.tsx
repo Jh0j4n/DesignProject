@@ -140,9 +140,11 @@ export const PROPERTIES: PropertyData[] = [
 interface FeaturedGridProps {
   onViewDetails: (id: number) => void;
   onViewAll?: () => void;
+  properties?: PropertyData[];
 }
 
-export default function FeaturedGrid({ onViewDetails, onViewAll }: FeaturedGridProps) {
+export default function FeaturedGrid({ onViewDetails, onViewAll, properties }: FeaturedGridProps) {
+  const items = properties ?? PROPERTIES;
   return (
     <section className="py-12 md:py-20 bg-gray-50/50" id="property-list">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
@@ -161,7 +163,7 @@ export default function FeaturedGrid({ onViewDetails, onViewAll }: FeaturedGridP
               transition={{ delay: 0.1 }}
               className="text-gray-500 mt-2"
             >
-              {PROPERTIES.length} inmuebles disponibles
+              {items.length} {items.length === 1 ? 'inmueble disponible' : 'inmuebles disponibles'}
             </motion.p>
           </div>
           <motion.button
@@ -174,8 +176,14 @@ export default function FeaturedGrid({ onViewDetails, onViewAll }: FeaturedGridP
           </motion.button>
         </div>
 
+        {items.length === 0 && (
+          <div className="text-center py-20 text-gray-400">
+            <p className="text-lg font-semibold">No se encontraron propiedades con esos filtros.</p>
+            <p className="text-sm mt-1">Intenta con otros criterios de búsqueda.</p>
+          </div>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {PROPERTIES.map((property, index) => (
+          {items.map((property, index) => (
             <motion.div
               key={property.id}
               initial={{ opacity: 0, y: 30 }}
