@@ -24,7 +24,7 @@ export default function AboutView() {
       className="pt-28 pb-20"
     >
       {/* Hero */}
-      <section className="bg-gradient-to-br from-primary-dark via-primary to-primary-light text-white py-28 px-6">
+      <section className="bg-gradient-to-br from-primary-dark via-primary to-primary-light text-white py-20 md:py-28 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -34,10 +34,10 @@ export default function AboutView() {
             <span className="inline-block bg-white/10 px-4 py-1.5 rounded-full text-white/80 text-[10px] font-bold uppercase tracking-widest mb-4">
               Nuestra Historia
             </span>
-            <h1 className="text-5xl md:text-6xl font-display font-extrabold mb-6 leading-tight max-w-3xl">
+            <h1 className="text-3xl md:text-6xl font-display font-extrabold mb-4 md:mb-6 leading-tight max-w-3xl">
               Más de 22 años construyendo confianza en el mercado inmobiliario colombiano
             </h1>
-            <p className="text-lg text-emerald-200 max-w-2xl leading-relaxed">
+            <p className="text-sm md:text-lg text-emerald-200 max-w-2xl leading-relaxed">
               Desde 2004, en Inmobiliaria Díaz Ltda. nos dedicamos a conectar personas con el hogar de sus sueños,
               respaldando cada transacción con rigor legal y calidez humana.
             </p>
@@ -46,7 +46,7 @@ export default function AboutView() {
       </section>
 
       {/* Timeline Milestones */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-display font-extrabold text-gray-900 mb-16 text-center">Nuestra Trayectoria</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -75,7 +75,7 @@ export default function AboutView() {
       </section>
 
       {/* Values */}
-      <section className="py-24 px-6 bg-gray-50/80">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-gray-50/80">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-display font-extrabold text-gray-900 mb-4">Nuestros Valores</h2>
@@ -106,7 +106,7 @@ export default function AboutView() {
       </section>
 
       {/* Team */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-display font-extrabold text-gray-900 mb-4">Conoce a nuestro equipo</h2>

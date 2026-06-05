@@ -24,11 +24,11 @@ export default function StatsCounter() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-7 h-7 text-primary" />
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/5 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <Icon className="w-5 h-5 md:w-7 md:h-7 text-primary" />
                 </div>
-                <div className="text-4xl md:text-5xl font-display font-extrabold text-gray-900 mb-1">{s.value}</div>
-                <div className="text-sm text-gray-500 font-medium">{s.label}</div>
+                <div className="text-3xl md:text-5xl font-display font-extrabold text-gray-900 mb-1">{s.value}</div>
+                <div className="text-xs md:text-sm text-gray-500 font-medium">{s.label}</div>
               </motion.div>
             );
           })}

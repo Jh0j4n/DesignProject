@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import HeroSlider from './components/HeroSlider';
+import PropertyFilters from './components/PropertyFilters';
 import FeaturedGrid, { PROPERTIES } from './components/FeaturedGrid';
 import PropertyDetail from './components/PropertyDetail';
 import ContactForm from './components/ContactForm';
@@ -7,7 +8,6 @@ import Partners from './components/Partners';
 import Footer from './components/Footer';
 import StatsCounter from './components/StatsCounter';
 import Testimonials from './components/Testimonials';
-import BlogPreview from './components/BlogPreview';
 import CTABanner from './components/CTABanner';
 import AboutView from './components/AboutView';
 import ServicesView from './components/ServicesView';
@@ -47,15 +47,15 @@ export default function App() {
 
   const renderHome = () => (
     <>
-      <Hero
+      <HeroSlider
         onExplore={() => handleNavigate('list')}
         onContact={() => handleNavigate('contact')}
       />
+      <PropertyFilters onSearch={() => handleNavigate('list')} />
+      <FeaturedGrid onViewDetails={handleViewDetails} onViewAll={() => handleNavigate('list')} />
       <Partners />
       <StatsCounter />
-              <FeaturedGrid onViewDetails={handleViewDetails} onViewAll={() => handleNavigate('list')} />
-              <Testimonials />
-              <BlogPreview onContact={() => handleNavigate('contact')} />
+      <Testimonials />
       <CTABanner onContact={() => handleNavigate('contact')} />
     </>
   );
@@ -89,7 +89,7 @@ export default function App() {
               className="pt-24"
             >
               <div className="max-w-7xl mx-auto px-6 md:px-8 py-16">
-                <header className="mb-16">
+                <header className="mb-12">
                   <span className="inline-block bg-primary/5 px-4 py-1.5 rounded-full text-primary text-[10px] font-bold uppercase tracking-widest mb-4">
                     Catálogo {PROPERTIES.length} propiedades
                   </span>
@@ -98,6 +98,7 @@ export default function App() {
                     Explora nuestra selección exclusiva de inmuebles residenciales, comerciales y de inversión, todos validados legalmente para tu tranquilidad.
                   </p>
                 </header>
+                <PropertyFilters onSearch={() => {}} noOffset />
                 <FeaturedGrid onViewDetails={handleViewDetails} onViewAll={() => handleNavigate('list')} />
               </div>
             </motion.div>

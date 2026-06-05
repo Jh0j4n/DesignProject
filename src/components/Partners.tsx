@@ -20,7 +20,7 @@ export default function Partners() {
           <h3 className="text-3xl md:text-4xl font-display font-extrabold text-gray-900">Aliados Estratégicos</h3>
         </div>
         
-        <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-16 gap-y-4 md:gap-y-10">
           {PARTNERS.map((partner, index) => (
             <motion.div
               key={index}

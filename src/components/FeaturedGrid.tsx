@@ -1,34 +1,17 @@
 import PropertyCard, { PropertyData } from './PropertyCard';
 import { motion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
 
-const PLACEHOLDER_COLORS = [
-  "from-emerald-600 to-teal-800", "from-blue-600 to-indigo-900",
-  "from-amber-600 to-orange-900", "from-rose-500 to-pink-900",
-  "from-violet-600 to-purple-900", "from-cyan-600 to-blue-900",
-  "from-lime-500 to-green-800", "from-red-500 to-rose-900",
-  "from-teal-500 to-emerald-900", "from-sky-500 to-indigo-800",
-  "from-fuchsia-500 to-purple-800", "from-yellow-500 to-amber-900",
-];
-
-const IMG = (n: number) => {
-  const images = [
-    "/images/photo-1512917774080-9991f1c4c750.avif",
-    "/images/photo-1600596542815-ffad4c1539a9.avif",
-    "/images/7.avif",
-    "/images/photo-1600210492486-724fe5c67fb0.avif",
-  ];
-  return { src: images[n % images.length], gradient: PLACEHOLDER_COLORS[n % PLACEHOLDER_COLORS.length] };
-};
-
-const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
+export const PROPERTIES: PropertyData[] = [
   {
     id: 1,
     title: "Villa Mediterránea con Vista al Mar",
     price: "$1.000.000",
     location: "S. Marta, Pozos Colorados",
     beds: 5, baths: 3, sqft: 180,
-    image: IMG(0).src, gradient: IMG(0).gradient,
-    description: "Espectacular villa de diseño moderno con amplios ventanales y acceso privado controlado. Cuenta con acabados de mármol y sistema de hogar inteligente.",
+    image: "/images/photo-1512917774080-9991f1c4c750.avif",
+    gradient: "from-emerald-600 to-teal-800",
+    description: "Espectacular villa de diseño moderno con amplios ventanales y acceso privado controlado.",
     features: ["Piscina infinita", "Cocina equipada", "Parqueadero privado", "Vista panorámica", "Gimnasio", "Zona BBQ", "Hogar inteligente", "Acabados de mármol"]
   },
   {
@@ -37,9 +20,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$375.000",
     location: "Bogotá, El Chicó",
     beds: 3, baths: 3, sqft: 120,
-    image: IMG(1).src, gradient: IMG(1).gradient,
-    description: "Vistas panorámicas de la ciudad en el corazón financiero. Terraza privada y acabados industriales elegantes.",
-    features: ["Terraza privada", "Vista 360°", "Parqueadero", "Seguridad 24/7", "Gimnasio", "Lobby ejecutivo"]
+    image: "/images/photo-1600596542815-ffad4c1539a9.avif",
+    gradient: "from-blue-600 to-indigo-900",
+    description: "Vistas panorámicas de la ciudad en el corazón financiero.",
+    features: ["Terraza privada", "Vista 360°", "Parqueadero", "Seguridad 24/7"]
   },
   {
     id: 3,
@@ -47,9 +31,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$320.000",
     location: "Medellín, Poblado",
     beds: 3, baths: 2, sqft: 110,
-    image: IMG(2).src, gradient: IMG(2).gradient,
-    description: "Diseño minimalista enfocado en la funcionalidad y la luz natural. Ubicación envidiable cerca de centros gastronómicos.",
-    features: ["Diseño minimalista", "Luz natural", "Jardín interior", "Parqueadero", "Cerca de gastrobares", "Acabados de lujo"]
+    image: "/images/7.avif",
+    gradient: "from-amber-600 to-orange-900",
+    description: "Diseño minimalista enfocado en la funcionalidad y la luz natural.",
+    features: ["Diseño minimalista", "Luz natural", "Jardín interior", "Parqueadero"]
   },
   {
     id: 4,
@@ -57,9 +42,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$300.000",
     location: "Cali, Pance",
     beds: 3, baths: 3, sqft: 180,
-    image: IMG(3).src, gradient: IMG(3).gradient,
-    description: "Amplitud y naturaleza se combinan en esta residencia a las afueras de la urbe. Clima ideal y espacios de recreación únicos.",
-    features: ["Piscina", "Zona de juegos", "Chimenea", "Huerta orgánica", "Parqueadero 2 autos", "Vista a la montaña"]
+    image: "/images/photo-1600210492486-724fe5c67fb0.avif",
+    gradient: "from-rose-500 to-pink-900",
+    description: "Amplitud y naturaleza se combinan en esta residencia a las afueras de la urbe.",
+    features: ["Piscina", "Zona de juegos", "Chimenea", "Huerta orgánica"]
   },
   {
     id: 5,
@@ -67,9 +53,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$180.000",
     location: "Bogotá, La Candelaria",
     beds: 2, baths: 1, sqft: 80,
-    image: IMG(1).src, gradient: IMG(1).gradient,
-    description: "Loft de estilo industrial con techos altos y ladrillo visto. Ideal para profesionales jóvenes que buscan vivir en el corazón cultural de la ciudad.",
-    features: ["Techos altos 4m", "Ladrillo visto", "Balcón", "Cerca de museos", "Transporte público", "Zona gastronómica"]
+    image: "/images/photo-1600596542815-ffad4c1539a9.avif",
+    gradient: "from-violet-600 to-purple-900",
+    description: "Loft de estilo industrial con techos altos y ladrillo visto.",
+    features: ["Techos altos 4m", "Ladrillo visto", "Balcón", "Cerca de museos"]
   },
   {
     id: 6,
@@ -77,9 +64,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$450.000",
     location: "Cartagena, Getsemaní",
     beds: 4, baths: 3, sqft: 200,
-    image: IMG(0).src, gradient: IMG(0).gradient,
-    description: "Hermosa casa colonial del siglo XVIII completamente restaurada. Patio interior, fuente de agua y azotea con vista al mar Caribe.",
-    features: ["Patio colonial", "Fuente de agua", "Azotea con vista", "Cocina restaurada", "Habitación principal con balcón", "Pisos de barro"]
+    image: "/images/photo-1512917774080-9991f1c4c750.avif",
+    gradient: "from-cyan-600 to-blue-900",
+    description: "Hermosa casa colonial del siglo XVIII completamente restaurada.",
+    features: ["Patio colonial", "Fuente de agua", "Azotea con vista", "Pisos de barro"]
   },
   {
     id: 7,
@@ -87,9 +75,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$95.000",
     location: "Bogotá, Chapinero",
     beds: 1, baths: 1, sqft: 45,
-    image: IMG(2).src, gradient: IMG(2).gradient,
-    description: "Moderno apartaestudio completamente amoblado. Perfecto para estudiantes o jóvenes profesionales que buscan independencia.",
-    features: ["Amoblado", "Cocina integral", "Lavandería", "Seguridad", "Wifi incluido", "Área de trabajo"]
+    image: "/images/7.avif",
+    gradient: "from-lime-500 to-green-800",
+    description: "Moderno apartaestudio completamente amoblado.",
+    features: ["Amoblado", "Cocina integral", "Lavandería", "Seguridad"]
   },
   {
     id: 8,
@@ -97,9 +86,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$220.000",
     location: "Medellín, Envigado",
     beds: 4, baths: 2, sqft: 150,
-    image: IMG(3).src, gradient: IMG(3).gradient,
-    description: "Amplia casa con jardín frontal y trasero. Perfecta para familias con niños. Cerca de colegios y centros comerciales.",
-    features: ["Jardín amplio", "Zona de juegos", "Cerca de colegios", "Parqueadero 2 autos", "Cuarto de servicio", "Chimenea"]
+    image: "/images/photo-1600210492486-724fe5c67fb0.avif",
+    gradient: "from-red-500 to-rose-900",
+    description: "Amplia casa con jardín frontal y trasero.",
+    features: ["Jardín amplio", "Zona de juegos", "Cerca de colegios", "Parqueadero"]
   },
   {
     id: 9,
@@ -107,9 +97,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$250.000",
     location: "Bogotá, Cedritos",
     beds: 0, baths: 2, sqft: 90,
-    image: IMG(0).src, gradient: IMG(0).gradient,
-    description: "Oficina ejecutiva en el norte de Bogotá. Sala de juntas, recepción y tres oficinas privadas. Ideal para empresas en crecimiento.",
-    features: ["Sala de juntas", "Recepción", "3 oficinas", "Parqueadero visitantes", "Cafetería", "Seguridad 24h"]
+    image: "/images/photo-1512917774080-9991f1c4c750.avif",
+    gradient: "from-teal-500 to-emerald-900",
+    description: "Oficina ejecutiva en el norte de Bogotá.",
+    features: ["Sala de juntas", "Recepción", "3 oficinas", "Parqueadero visitantes"]
   },
   {
     id: 10,
@@ -117,9 +108,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$160.000",
     location: "Santander, Barichara",
     beds: 3, baths: 2, sqft: 100,
-    image: IMG(1).src, gradient: IMG(1).gradient,
-    description: "Encantadora cabaña de montaña con vista al cañón del Chicamocha. Chimenea de leña, terraza con hamacas y entorno natural.",
-    features: ["Chimenea de leña", "Terraza con hamacas", "Vista al cañón", "Cocina campestre", "Senderos ecológicos", "Horno de leña"]
+    image: "/images/photo-1600596542815-ffad4c1539a9.avif",
+    gradient: "from-sky-500 to-indigo-800",
+    description: "Encantadora cabaña de montaña con vista al cañón del Chicamocha.",
+    features: ["Chimenea de leña", "Terraza con hamacas", "Vista al cañón", "Cocina campestre"]
   },
   {
     id: 11,
@@ -127,9 +119,10 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$190.000",
     location: "Bogotá, Galerías",
     beds: 0, baths: 1, sqft: 65,
-    image: IMG(2).src, gradient: IMG(2).gradient,
-    description: "Local comercial en esquina con alta afluencia peatonal y vehicular. Ideal para restaurante, tienda o servicios.",
-    features: ["Vitrina amplia", "Baño público", "Bodega", "Aire acondicionado", "Alto tráfico", "Zona de descarga"]
+    image: "/images/7.avif",
+    gradient: "from-fuchsia-500 to-purple-800",
+    description: "Local comercial en esquina con alta afluencia peatonal.",
+    features: ["Vitrina amplia", "Baño público", "Bodega", "Alto tráfico"]
   },
   {
     id: 12,
@@ -137,13 +130,12 @@ const PROPERTIES_DATA: (PropertyData & { gradient: string })[] = [
     price: "$550.000",
     location: "Tolú, Costa Caribe",
     beds: 5, baths: 4, sqft: 250,
-    image: IMG(3).src, gradient: IMG(3).gradient,
-    description: "Espectacular casa frente al mar con acceso directo a la playa. Piscina infinita, terraza con palapa y hamacas.",
-    features: ["Acceso directo a playa", "Piscina infinita", "Palapa", "Muelle privado", "Cuarto de huéspedes", "Área de fogata"]
+    image: "/images/photo-1600210492486-724fe5c67fb0.avif",
+    gradient: "from-yellow-500 to-amber-900",
+    description: "Espectacular casa frente al mar con acceso directo a la playa.",
+    features: ["Acceso directo a playa", "Piscina infinita", "Palapa", "Muelle privado"]
   }
 ];
-
-export const PROPERTIES: PropertyData[] = PROPERTIES_DATA;
 
 interface FeaturedGridProps {
   onViewDetails: (id: number) => void;
@@ -152,60 +144,48 @@ interface FeaturedGridProps {
 
 export default function FeaturedGrid({ onViewDetails, onViewAll }: FeaturedGridProps) {
   return (
-    <section className="py-28 bg-gray-50/50" id="property-list">
+    <section className="py-12 md:py-20 bg-gray-50/50" id="property-list">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-xl">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="inline-flex items-center gap-2 bg-primary/5 px-4 py-1.5 rounded-full text-primary text-[10px] font-bold uppercase tracking-widest mb-6"
-            >
-              Selección Exclusiva
-            </motion.div>
-            <motion.h2 
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-display font-extrabold text-gray-900 leading-tight"
+              className="text-3xl md:text-4xl font-display font-extrabold text-gray-900 leading-tight"
             >
-              Descubre nuestras Propiedades Destacadas
+              Propiedades Destacadas
             </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-gray-500 mt-2"
+            >
+              {PROPERTIES.length} inmuebles disponibles
+            </motion.p>
           </div>
-          <motion.div
+          <motion.button
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="flex gap-4"
+            onClick={onViewAll}
+            className="text-primary font-bold text-sm hover:underline flex items-center gap-1"
           >
-            <button className="px-6 py-3 rounded-xl border-2 border-gray-100 font-bold text-gray-500 hover:border-primary hover:text-primary transition-all">
-              Filtrar por ciudad
-            </button>
-            <button className="px-6 py-3 rounded-xl border-2 border-gray-100 font-bold text-gray-500 hover:border-primary hover:text-primary transition-all">
-              Mayor precio
-            </button>
-          </motion.div>
+            Ver todos <ArrowRight className="w-4 h-4" />
+          </motion.button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {PROPERTIES.map((property, index) => (
             <motion.div
               key={property.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: index * 0.05, duration: 0.4 }}
             >
               <PropertyCard {...property} onViewDetails={onViewDetails} />
             </motion.div>
           ))}
-        </div>
-        
-        <div className="mt-20 text-center">
-          <button 
-            onClick={onViewAll || (() => onViewDetails(PROPERTIES[0].id))}
-            className="inline-flex items-center gap-3 text-primary font-display font-black text-xl hover:translate-x-2 transition-transform"
-          >
-            Ver catálogo completo <span className="w-12 h-[2px] bg-primary"></span>
-          </button>
         </div>
       </div>
     </section>

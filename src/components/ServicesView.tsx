@@ -43,7 +43,7 @@ export default function ServicesView({ onContact }: { onContact: () => void }) {
       className="pt-28 pb-20"
     >
       {/* Header */}
-      <section className="bg-gradient-to-br from-primary-dark via-primary to-primary-light text-white py-28 px-6">
+      <section className="bg-gradient-to-br from-primary-dark via-primary to-primary-light text-white py-20 md:py-28 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
